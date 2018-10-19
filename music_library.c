@@ -42,8 +42,10 @@ void find_artist( char artist[100]){ //printf whether artist is found or not
 //print out all the songs of a certain letter
 void print_letter( char letter){
     int i = 97;
-	while (letter != i){i++}; 
-	printf( print_list(table[i-97];
+    while (letter != i){
+      i++; 
+      printf( print_list(table[i-97]));
+    }
 }
 
 //print out the songs of a certain artist
@@ -63,20 +65,19 @@ void print_library(){
 
 //shuffle and print out randomly chosen songs
 void shuffled_playlist(){
+  printf( "shuffled playlist: ");
   int n = 0;
   while( n < 4) {
-    printf( random_song());
+    struct song_node *next_song = random_song();
+    printf( "%s by %s, ", next_song->name, next_song->artist);
     n++;
   }
 }
 
 //delete a specified song
 struct song_node *delete_song( char name[100], char artist[100]){
-    struct song_node *name_artist = malloc(sizeof(struct song_node));
-	name_artist->name = name;
-	name_artist->artist = artist;
-	remove_song(name_artist);
-	}
+  remove_song( locate_song( name, artist)) ;
+}
 
 //clear the entire library
 struct song_node *clear_library(){
