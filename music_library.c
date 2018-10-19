@@ -34,9 +34,9 @@ struct song_node *locate_song( char name[100], char artist[100]){
 //search for an artist
 void find_artist( char artist[100]){ //printf whether artist is found or not
   if( first_song( artist, find_letter_array(artist)) == NULL)
-    printf( "artist not found!");
+    printf( "artist not found!\n");
   else
-    printf( "artist found!");
+    printf( "artist found!\n");
 }
 
 //print out all the songs of a certain letter
@@ -44,16 +44,20 @@ void print_letter( char letter){
     int i = 97;
     while (letter != i){
       i++; 
-      printf( print_list(table[i-97]));
+     print_list(table[i-97]);
     }
 }
 
 //print out the songs of a certain artist
 void print_artist_songs( char artist[100]){
-	if (find_artist(artist))
-		
-	else 
-		printf("artist doesn't exist";)
+  char *artistp = artist;
+  struct song_node *cur_node = first_song( artist, find_letter_array(artist));
+  if ( cur_node == NULL)
+    printf( "artist doesn't exist\n");
+  else {
+    while( ! strcmp( cur_node->artist, artistp))
+      printf( "%s, ", cur_node->name);
+  }
 }
 
 //print out entire library
