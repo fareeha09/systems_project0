@@ -6,14 +6,14 @@
 #include "music_library.h"
 
 
-struct song_node * table[27]; //i don't think this is supposed to go here but?
+struct song_node * table[27];
 
 //find which linked list to go into
 struct song_node *find_letter_array( char artist[100]){
   int n = 0;
   char *artistp = artist;
   printf("0\n");
-  while( strcmp( table[n]->artist, artistp) < 0) { //seg fault is here??
+  while( strcmp( table[n]->artist, artistp) < 0) { //seg fault is here
     printf("2\n");
     n++;
   }
