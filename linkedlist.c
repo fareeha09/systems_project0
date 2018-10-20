@@ -34,19 +34,18 @@ struct song_node *insert_ordered(struct song_node *cur_node, char name[100], cha
   new_node->next = NULL;
   
   while (cur_node){
-	  if (strcmp(new_node, cur_node) < 0){
+	  if (strcmp(new_node->artist, cur_node->artist) < 0){
 		before = cur_node;
 		cur_node = cur_node->next;
 		}
-	  else if (strcmp(new_node, cur_node) > 0){
+	  else if (strcmp(new_node->artist, cur_node->artist) > 0){
 		before->next = new_node;
 		new_node->next = cur_node;
 		cur_node=NULL;
 	    }
 	  else {return NULL;}
-	  
+  }
   return new_node;
-}
 }
 
 
@@ -104,13 +103,13 @@ struct song_node *random_song(struct song_node *first){
 void remove_song( struct song_node *cur_node, struct song_node *removed){
   struct song_node *before = malloc(sizeof(struct song_node));
   while (cur_node){
-	  if (strcmp(cur_node, removed)){
+	  if (strcmp(cur_node->name, removed->name)){
 		before = cur_node;
 		cur_node = cur_node->next;} 
       else {cur_node = NULL;}
   }	
   before->next = removed->next;
-  free(removed); 
+  free(removed);
 }
 
 //free the entire list starting from curnode and return a null pointer if all goes as planned
