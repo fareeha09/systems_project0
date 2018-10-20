@@ -6,10 +6,8 @@
 #include "music_library.h"
 
 
-struct song_node * table[27];
-
 //find which linked list to go into
-struct song_node *find_letter_array( char artist[100]){
+struct song_node *find_letter_array(table*[27]; char artist[100]){
   int n = 0;
   char *artistp = artist;
   printf("0\n");
@@ -22,8 +20,11 @@ struct song_node *find_letter_array( char artist[100]){
 }
 
 //add song nodes
-void add_song( char name[100], char artist[100]){
-  insert_song( name, artist, find_letter_array(artist));
+void add_song(struct song_node *table[27], char name[100], char artist[100]){
+  char *name0 = name;
+  char *artist0 = artist;
+  int i = 'A';
+  table[artist-i] = insert_song(find_letter_array(artist), name, artist);
 }
 
 //seach for a song given a song and artist name (return a pointer)
@@ -61,10 +62,11 @@ void print_artist_songs( char artist[100]){
 }
 
 //print out entire library
-void print_library(){
+void print_library(struct song_node *table[27]){
   int n = 0;
   while ( n < 27)
     print_list( table[n]);
+    n++;
 }
 
 //shuffle and print out randomly chosen songs
@@ -86,4 +88,54 @@ struct song_node *delete_song( char name[100], char artist[100]){
 //clear the entire library
 struct song_node *clear_library(){
 	
+}
+
+int main(){
+   printf("MUSIC LIBRARY TEST\n");
+   printf("======================================\n");
+   
+   struct song_node * table[27];
+   
+   add_song(table, "Selena Gomez", "Come and Get It";
+   add_song(table, "Demi Lovato", "Sorry not Sorry";
+   add_song(table, "Billie Eilesh", "Lonely";
+
+   printf("Testing print_library:\n");
+   print_library(table);
+   printf("___________________\n");
+   
+   printf("Testing print_list w/ null pointer:\n");
+   struct song_node *locate = locate_song( "Sorry not Sorry", "Demi Lovato");
+   print_list(locate);
+   printf("Testing print_list w/ null pointer:\n");
+   struct song_node *pointer = locate_song(NULL);
+   printf("___________________\n");
+   
+   printf("Testing find_artist:\n"
+   find_artist( char artist[100]); //printf whether artist is found or not
+   if (find_artist( char artist[100])) printf(True); 
+   printf("___________________\n");
+   
+   printf("Testing print_letter");
+   print_letter( 'C' );
+   printf("___________________\n");
+   
+   printf("Testing print artist songs");
+   print_artist_songs( "Selena Gomez");
+   printf("___________________\n");
+   
+   printf("Testing print_libary");
+   print_library();
+   printf("___________________\n");
+   
+   printf("Testing shuffled playlist");
+   shuffled_playlist();
+   printf(table);
+   printf("___________________\n");
+   
+   printf("Testing delete song");
+   struct song_node * n0 = delete_song( "Come and Get It", "Selena Gomez");
+   struct song_node * n1 = clear_library();
+   print_library;
+
 }

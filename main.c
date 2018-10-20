@@ -6,7 +6,7 @@
 
 int main(){
    printf("LINKED LIST TESTS\n");
-   printf("==================\n");
+   printf("======================================\n");
    struct song_node * p0 = malloc(sizeof(struct song_node)); 
    struct song_node * p1 = malloc(sizeof(struct song_node));
    struct song_node * p2 = malloc(sizeof(struct song_node)); 
@@ -54,16 +54,30 @@ int main(){
    printf("song name: %s \n", find); 
    printf("___________________\n");
    
-   // printf("Testing remove_song: \n");
-   // remove_song(p2);
-   // print_list(new);
-   // printf("___________________\n");
+   printf("Before Removal: \n");
+   print_list(new);
+   printf("\nAfter Removal of last element: \n");
+   remove_song(new, p2);
+   print_list(new);
+   printf("\nAfter Removal of second element: \n");
+   remove_song(new, p0);
+   print_list(new);
+   printf("___________________\n");
    
-   // printf("Testing insert song in order:\n");
-   // struct song_node *new0 = malloc(sizeof(struct song_node));
-   // new0 = insert_song(p0, "Just the Way You Are" , "Bruno Mars");
-   // print_list(new0);
-   // printf("___________________\n");
+   printf("Testing insert song in order:\n\n");
+   struct song_node *new0 = malloc(sizeof(struct song_node));
+   new0 = insert_ordered(new, "Just the Way You Are" , "Bruno Mars");
+   print_list(new0);
+   
+   struct song_node *new1 = malloc(sizeof(struct song_node));
+   new1 = insert_ordered(new, "Because You Loved Me" , "Celine Dion");
+   print_list(new1);
+   
+   struct song_node *new2 = malloc(sizeof(struct song_node));
+   new2 = insert_ordered(new, "Grenade" , "Bruno Mars");
+   print_list(new2);
+   printf("___________________\n");
+   
    
    // printf("Freeing the List: \n");
    // struct song_node *freed= free_list(new0);
@@ -74,6 +88,7 @@ int main(){
   // add_song( "Good Vibrations", "The Beach Boys");
   // print_library();
    }
+
 
 
 
