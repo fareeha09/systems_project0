@@ -11,7 +11,7 @@ struct song_node *find_letter_array(struct song_node *table[]; char artist[100])
   char *artist0 = artist;
   char c = *artist0;   
   int index = c- 'A'; //ascii value of char - ascii value of anothe char gives the index
-  return table[c-'A']; //i tested this and it works^^
+  return table[index]; //i tested this and it works^^
 }
 
 //add song nodes
