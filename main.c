@@ -5,6 +5,10 @@
 #include "music_library.h"
 
 int main(){
+   char *p= "celine";	
+   int i = (*p - "c");
+   
+   printf("%d\n", i);
    printf("LINKED LIST TESTS\n");
    printf("======================================\n");
    struct song_node * p0 = malloc(sizeof(struct song_node)); 
@@ -78,15 +82,11 @@ int main(){
    print_list(new2);
    printf("___________________\n");
    
+   printf("Freeing the List: \n");
+   struct song_node *freed= free_list(new0);
+   print_list(freed);
    
-   // printf("Freeing the List: \n");
-   // struct song_node *freed= free_list(new0);
-   // print_list(freed);
-   
-  // printf("MUSIC LIBRARY TESTS\n");
-  // printf("==================\n");
-  // add_song( "Good Vibrations", "The Beach Boys");
-  // print_library();
+
    }
 
 

@@ -7,24 +7,16 @@
 
 
 //find which linked list to go into
-struct song_node *find_letter_array(table*[27]; char artist[100]){
-  int n = 0;
-  char *artistp = artist;
-  printf("0\n");
-  while( strcmp( table[n]->artist, artistp) < 0) { //seg fault is here
-    printf("2\n");
-    n++;
-  }
-  printf("1\n");
-  return table[n-1];
+struct song_node *find_letter_array(struct song_node *table[]; char artist[100]){
+  char *artist0 = artist;
+  char c = *artist0;   
+  int index = c- 'A'; //ascii value of char - ascii value of anothe char gives the index
+  return table[c-'A']; //i tested this and it works^^
 }
 
 //add song nodes
-void add_song(struct song_node *table[27], char name[100], char artist[100]){
-  char *name0 = name;
-  char *artist0 = artist;
-  int i = 'A';
-  table[artist-i] = insert_song(find_letter_array(artist), name, artist);
+void add_song(struct song_node *arr[27], char name[100], char artist[100]){
+  insert_ordered(find_letter_array(arr, artist), name, artist);
 }
 
 //seach for a song given a song and artist name (return a pointer)
@@ -42,10 +34,10 @@ void find_artist( char artist[100]){ //printf whether artist is found or not
 
 //print out all the songs of a certain letter
 void print_letter( char letter){
-    int i = 97;
+    int i = 65; //ascii value of capital A
     while (letter != i){
       i++; 
-     print_list(table[i-97]);
+     print_list(table[i-65]);
     }
 }
 
@@ -56,9 +48,12 @@ void print_artist_songs( char artist[100]){
   if ( cur_node == NULL)
     printf( "artist doesn't exist\n");
   else {
-    while( ! strcmp( cur_node->artist, artistp))
-      printf( "%s, ", cur_node->name);
+    while(cur_node){
+      if  (!strcmp( cur_node->artist, artistp)
+	      printf( "%s, ", cur_node->name);
+	  cur_node = cur_node->next;
   }
+}
 }
 
 //print out entire library
@@ -70,12 +65,15 @@ void print_library(struct song_node *table[27]){
 }
 
 //shuffle and print out randomly chosen songs
-void shuffled_playlist(){
+void shuffled_playlist(struct song_node *table[27]){
   printf( "shuffled playlist: ");
+  srand( time(NULL) );
   int n = 0;
   while( n < 4) {
-    struct song_node *next_song = random_song();
-    printf( "%s by %s, ", next_song->name, next_song->artist);
+	int num = rand() % 27;
+	struct song_node *node = table[num];
+    struct song_node *next_song = random_song(node);
+    printf( "%s: \"%s\" | ", next_song->artist, next_song->name);
     n++;
   }
 }
@@ -86,11 +84,16 @@ struct song_node *delete_song( char name[100], char artist[100]){
 }
 
 //clear the entire library
-struct song_node *clear_library(){
-	
+void clear_library(struct song_node *table[27]){
+	int i=0;
+	while(i < 27){
+		free_list(table[i]);
+		i++;
+	}
 }
 
 int main(){
+	
    printf("MUSIC LIBRARY TEST\n");
    printf("======================================\n");
    
@@ -135,7 +138,7 @@ int main(){
    
    printf("Testing delete song");
    struct song_node * n0 = delete_song( "Come and Get It", "Selena Gomez");
-   struct song_node * n1 = clear_library();
-   print_library;
+   clear_library();
+   print_library(table);
 
 }

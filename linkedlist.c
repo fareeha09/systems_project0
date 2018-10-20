@@ -114,11 +114,10 @@ void remove_song( struct song_node *cur_node, struct song_node *removed){
 }
 
 //free the entire list starting from curnode and return a null pointer if all goes as planned
-struct song_node * free_list(struct song_node *cur_node) {
+void free_list(struct song_node *cur_node) {
     while( cur_node) {
     struct song_node *next_node = cur_node->next;
     free( cur_node);
     cur_node = next_node;
   }
-  return cur_node;
 }
