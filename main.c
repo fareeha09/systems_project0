@@ -28,8 +28,8 @@ int main(){
    printf("___________________\n");
    
    printf("Testing insert front:\n");
-   struct song_node *new = malloc(sizeof(struct song_node));
-   new = insert_front(p0, "Grenade","Bruno Mars");
+   struct song_node *new = NULL;
+   new = insert_front(p0, "Grenade","Cruno Mars");
    print_list(new);
    printf("___________________\n");
    
@@ -66,19 +66,25 @@ int main(){
    printf("\nAfter Removal of second element: \n");
    remove_song(new, p0);
    print_list(new);
+   printf("\nAfter Removal of first element: \n");
+   remove_song(new, p1);
+   print_list(new);
+   printf("\nAfter Removal of last element: \n");
+   remove_song(new, p3);
+   print_list(new);
    printf("___________________\n");
    
    printf("Testing insert song in order:\n\n");
-   struct song_node *new0 = malloc(sizeof(struct song_node));
-   new0 = insert_ordered(new, "Just the Way You Are" , "Bruno Mars");
+   struct song_node *new0 = NULL;
+   new0 = insert_ordered(new, "Just the Way You Are" , "Cruno Mars");
+   print_list(new);
+   
+   struct song_node *new1 = NULL;
+   new1 = insert_ordered(new, "Because You Loved Me" , "Celine Dion");
    print_list(new0);
    
-   struct song_node *new1 = malloc(sizeof(struct song_node));
-   new1 = insert_ordered(new, "Because You Loved Me" , "Celine Dion");
-   print_list(new1);
-   
-   struct song_node *new2 = malloc(sizeof(struct song_node));
-   new2 = insert_ordered(new, "Grenade" , "Bruno Mars");
+   struct song_node *new2 = NULL;
+   new = insert_ordered(new, "Grenade" , "Cruno Mars");
    print_list(new2);
    printf("___________________\n");
    
@@ -86,60 +92,69 @@ int main(){
    //   struct song_node *freed= free_list(new0);
    print_list(new2);
 
-   	
-   printf("MUSIC LIBRARY TEST\n");
+   printf("\n\nMUSIC LIBRARY TEST\n");
    printf("======================================\n");
    
-   struct song_node * table[27];
+   struct song_node * table[27]= { NULL };;
    
-   add_song(table, "Come and Get It", "Selena Gomez");
-   add_song(table, "Sorry not Sorry", "Demi Lovato");
-   add_song(table, "Lonely", "Billie Eilesh");
-
+   table[find_letter_array(table, "Selena Gomez")] = add_song(table, "Wolves", "Selena Gomez");
+   table[find_letter_array(table, "Selena Gomez")] = add_song(table, "Come and Get It", "Selena Gomez");
+   table[find_letter_array(table, "Drake")] = add_song(table, "In my Feelings", "Drake");
+   table[find_letter_array(table, "Drake")] = add_song(table, "God's Plan", "Drake");
+   table[find_letter_array(table, "Demi Lovato")] = add_song(table, "Sorry not Sorry", "Demi Lovato"); 
+   table[find_letter_array(table, "Billie Eilish")] = add_song(table, "Lonely", "Billie Eilish"); 
+   table[find_letter_array(table, "Cardi B")] = add_song(table, "I Like It", "Cardi B"); 
+   table[find_letter_array(table, "Migos")] = add_song(table, "Walk It Talk It", "Migos"); 
+   table[find_letter_array(table, "Maroon 5")] = add_song(table, "Girls Like You", "Maroon 5");
+   table[find_letter_array(table, "Ariana Grande")] = add_song(table, "No Tears Left to Cry", "Ariana Grande");
+   table[find_letter_array(table, "Hailee Steinfield")] = add_song(table, "Most Girls", "Hailee Steinfield"); 
+   table[find_letter_array(table, "XXXTentacion")] = add_song(table, "SAD!", "XXXTentacion"); 
+   table[find_letter_array(table, "Lil Dicky")] = add_song(table, "Freaky Friday", "Lil Dicky");
+   table[find_letter_array(table, "Post Malone")] = add_song(table, "Better Now", "Post Malone");
+   table[find_letter_array(table, "Juice Wrld")] = add_song(table, "Lucid Dreams", "Juice Wrld"); 
+   table[find_letter_array(table, "Eminem")] = add_song(table, "Rap God", "Eminem"); 
+   table[find_letter_array(table, "Travis Scott")] = add_song(table, "Yosemite", "Travis Scott");
+   
+   
    printf("Testing print_library:\n");
    print_library(table);
    printf("___________________\n");
    
-   printf("Testing print_list w/ null pointer:\n");
+   printf("Testing locate_song:\n");
    struct song_node *locate = locate_song( table, "Sorry not Sorry", "Demi Lovato");
    print_list(locate);
-   printf("Testing print_list w/ null pointer:\n");
-   struct song_node *pointer = locate_song(table, NULL, NULL);
+   printf("Testing locate_song that doesn't exist:\n");
+   struct song_node *pointer = locate_song(table, "D", "D");
+   print_list(pointer);
    printf("___________________\n");
    
-   printf("Testing find_artist:\n");
+   printf("Testing find_artist w/ existing artist:\n");
    find_artist( table, "Demi Lovato"); //printf whether artist is found or not
-	  //  if (find_artist( char artist[100])) printf("true"); 
+   printf("Testing find_artist w/ non-existent artist:\n");
+   find_artist( table, "No");
    printf("___________________\n");
-   
-   printf("Testing print_letter:\n");
+    
+   printf("Testing print_letter 'C' (null):\n");
    print_letter( table, 'C' );
+   printf("Testing print_letter 'B':\n");
+   print_letter( table, 'B' );
    printf("___________________\n");
    
-   printf("Testing print artist songs:\n");
+   printf("Testing print artist songs w/ Selena Gomez:\n");
    print_artist_songs(table, "Selena Gomez");
-   printf("___________________\n");
-   
-   printf("Testing print_libary:\n");
-   print_library(table);
+   printf("Testing print artist songs w/ non-existent artist:\n");
+   print_artist_songs(table, "No");
    printf("___________________\n");
    
    printf("Testing shuffled playlist:\n");
-   shuffled_playlist(table);
-   //  printf(table);
+   shuffled_playlist(table); 
    printf("___________________\n");
    
    printf("Testing delete song:\n");
    delete_song( table, "Come and Get It", "Selena Gomez");
-   print_library(table);
    printf("___________________\n");
 
-   printf("Testing clear library:");
+   printf("Testing clear library: \n");
    clear_library(table);
-   print_library(table);
 
-   }
-
-
-
-
+}

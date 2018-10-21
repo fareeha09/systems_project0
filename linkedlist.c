@@ -26,6 +26,8 @@ struct song_node *insert_front(struct song_node *prev_front, char name[100], cha
 //takes an artist and song name and inserts it into the correct place (ordered)
 struct song_node *insert_ordered(struct song_node *cur_node, char name[100], char artist[100]) {
   
+  if (!cur_node){insert_front(cur_node, name, artist);}
+  
   struct song_node *new_node = malloc( sizeof( struct song_node));
   struct song_node *before = malloc( sizeof( struct song_node));
   struct song_node *after = malloc( sizeof( struct song_node));
@@ -34,17 +36,20 @@ struct song_node *insert_ordered(struct song_node *cur_node, char name[100], cha
   new_node->next = NULL;
   
   while (cur_node){
-	  if (strcmp(new_node->artist, cur_node->artist) < 0){
+	  //if the artist is after the current artist
+	  if (strcmp(new_node->artist, cur_node->artist) > 0){
 		before = cur_node;
 		cur_node = cur_node->next;
 		}
-	  else if (strcmp(new_node->artist, cur_node->artist) > 0){
+      //if the artist is before the current artist
+	  else if (strcmp(new_node->artist, cur_node->artist) < 0){
 		before->next = new_node;
 		new_node->next = cur_node;
 		cur_node=NULL;
 	    }
 	  else {return NULL;}
   }
+  
   return new_node;
 }
 
@@ -91,6 +96,8 @@ int length( struct song_node *node ){
 struct song_node *random_song(struct song_node *first){
 	srand( time(NULL) );
 	int size= length(first);
+	if(size == 0)
+		return first;
 	int num = rand() % size;
 	while(num){
 		first = first->next;
